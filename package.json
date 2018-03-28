@@ -1,0 +1,22 @@
+{
+  "name": "track-your-work",
+  "version": "1.0.0",
+  "description": "get ready to track your work",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saritakha/track-your-work.git"
+  },
+  "author": "Sarita khanal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saritakha/track-your-work/issues"
+  },
+  "homepage": "https://github.com/saritakha/track-your-work#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
