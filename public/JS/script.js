@@ -4,7 +4,7 @@ const login = document.getElementById('submit');
 
 login.addEventListener('click',  () => {
     console.log("what happened");
-    window.location.href="home.html";
+    window.location.href="home.ejs";
 },false);
 
 //   handlers = {
