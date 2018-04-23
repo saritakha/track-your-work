@@ -1,5 +1,5 @@
 * {
-    color: white;
+    color: black;
 }
 
 html,
@@ -14,6 +14,10 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+label{
+    color:white;
 }
 
 .main{ 
@@ -37,4 +41,48 @@ img {
     margin-right: auto;
     margin-bottom: 40px;
     width: 70%;
+}
+
+footer {
+    color: aliceblue;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height:60px;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+} 
+
+.navbar{
+    color: white;
+    padding: 3%;
+    min-height: 100vh;
+    font-size: 18px;
+}
+
+.jumbotron {
+    background-color: bisque;
+    max-width: 100%;
+    margin: 20px;
+    padding: 30px;
+    z-index: 5;
+}
+
+.col-lg-3{
+    border:1px solid black;
+    padding: 10px;
+    margin: 20px;
+    background-color: rgb(130, 130, 214);
+}
+
+.card{
+    font-size: 18px;
+}
+
+.addTask{
+    position: fixed;
+    margin: 20%;
 }

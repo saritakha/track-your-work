@@ -1,0 +1,17 @@
+<% include partials/header %>
+
+    <body>
+        <div class="container-fluid">
+            <form action="/" method="POST">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text-area" class="form-control p-2" rows="4" name="details" placeholder="What is going to be there in this task">
+                </div>
+                <button type="submit" class="btn btn-success btn-block ">Add task</button>
+              </form>
+              </div>
+        <% include partials/footer%>

@@ -1,79 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<%- include partials/header.ejs %>
+
+<% include partials/header %>
 
 <body>
 <div class="wrapper">
-  <%- include partials/nav.ejs %>
+  <% include partials/nav %>
   
-    <div class="container-fluid">
-      <div class="jumbotron bg-default">
-        <h2>Welcome to App. Enjoy Posting Work!!</h2>
-      </div>
+    <main class="container-fluid">
+      <header class="jumbotron bg-default">
+        <h2>Welcome to App!!</h2>
+      </header>
       <div class="container">
         <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-10 bg-success">
-            <div class="card">
-              <div class="card-body">
+          <article class="col-lg-3 col-md-4 col-sm-10 bg-success">
+            <card class="card">
+              <p class="card-body">
                 <h3 class="card-title ">Click to add </h3>
-                <a href="#" class="btn btn-lg btn-success">Add</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-10  ">
-            <div class="card ">
-              <div class="card-body text-center">
+                <a href="/new"class="btn btn-lg btn-pill btn-success">Add</a>
+              </p>
+            </card>
+          </article>
+          <article class="col-lg-3 col-md-4 col-sm-10  ">
+            <card class="card ">
+              <p class="card-body text-center">
                 <h3 class="card-title">Sample</h3>
                 <p class="card-text">Here are the samples of card </p>
                 <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-10 ">
-            <div class="card">
-              <div class="card-body text-center">
+              </p>
+            </card>
+          </article>
+          <article class="col-lg-3 col-md-4 col-sm-10 ">
+            <card class="card">
+              <p class="card-body text-center">
                 <h3 class="card-title">Learn HTML</h3>
                 <p class="card-text">In this card , I want to store all my data related to HtML.</p>
                 <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-10 ">
-            <div class="card">
-              <div class="card-body text-center">
+              </p>
+            </card>
+          </article>
+          <article class="col-lg-3 col-md-4 col-sm-10 ">
+            <card class="card">
+              <p class="card-body text-center">
                 <h3 class="card-title">Learn CSS</h3>
                 <p class="card-text">In this card , I want to store all my data related to CSS.</p>
                 <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-10 " >
-            <div class="card">
-              <div class="card-body text-center">
+              </p>
+            </card>
+          </article>
+          <article class="col-lg-3 col-md-4 col-sm-10 " >
+            <card class="card">
+              <p class="card-body text-center">
                 <h3 class="card-title">Learn Javascript</h3>
                 <p class="card-text">Let me start of Javascript</p>
                 <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-10 " >
-            <div class="card">
-              <div class="card-body text-center">
+              </p>
+            </card>
+          </article>
+          <article class="col-lg-3 col-md-4 col-sm-10 " >
+            <card class="card">
+              <p class="card-body text-center">
                 <h3 class="card-title">Learn Writing Poem</h3>
                 <p class="card-text">I am done with coding. I will start to learn about writing poems</p>
                 <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </div>
-            </div>
-          </div>
+              </p>
+            </card>
+          </article>
         </div>
       <!-- <div class="embed-responsive embed-responsive-16by9">
           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
         </div> -->
       </div>
     </div>
-  </div>
-  <%- include partials/footer.ejs %>
-  <script type="text/javascript" src="./JS/script.js"></script>
-</body>
-
-</html>
+  </main>
+  <% include partials/footer %>
+ 
