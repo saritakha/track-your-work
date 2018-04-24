@@ -7,11 +7,23 @@ const express = require('express'),
     helmet = require('helmet'),
     cors = require('cors'),
     session = require('express-session');
-    tasks = require('./routes/tasks'),
-    users = require('./routes/users');
+    tasks = require('./routes/modules/tasks'),
+    route = require('./routes/index');
+    users = require('./routes/modules/users'),
+    mongoose = require('mongoose'),
+    port = process.env.PORT; 
 
 //initiating app
 const app = express();
+
+//tls/ssl certificate/key for https
+const sslkey = fs.readFileSync('ssl-key.pem');
+const sslcert = fs.readFileSync('ssl-cert.pem');
+
+const options = {
+    key: sslkey,
+    cert: sslcert
+};
 
 //set view engine
 app.set('view engine', 'ejs');
@@ -19,35 +31,19 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+//helmet implemented to make the app secure
+app.use(helmet());
 app.use('/api/tasks', tasks);
 // app.use('/',users);
 
 //joining app to public
 app.use(express.static('public'));
 
-
-//set route for accesing data
-app.get('/', (req, res) => {
-    res.render('home');
+// Connecting to database and starting the server
+// mongoose.connect(`mongodb://${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`)
+mongoose.connect('mongodb://127.0.0.1:27017/myAppDb')
+.then(() => {
+https.createServer(options, app).listen(3000 || port);
 });
 
-app.get('/undone', (req, res) => {
-    res.render('undone');
-});
-
-app.get('/done', (req, res) => {
-    res.render('done');
-});
-
-app.get('/home', (req, res) => {
-    res.render('home');
-});
-
-app.get('/new', (req, res) => {
-    res.render('addTask');
-});
-
-//listening port 3000
-app.listen(3000, () => {
-    console.log('server running');
-});
+route(app);

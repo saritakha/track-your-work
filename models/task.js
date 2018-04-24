@@ -16,15 +16,14 @@ const Task = mongoose.model('Task', new mongoose.Schema({
         maxLength:100,
         minLength:5
     }
-    
 }));
 
 const validateTask = (task) => {
     const schema = {
         name: Joi.string().min(5).max(50).required()
     };
-return Joi.validate(user,schema)
+return Joi.validate(task,schema)
 } 
 
  module.exports.task = Task;
- module.exports.validate = validateUser;
+ module.exports.validate = validateTask;
