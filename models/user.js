@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const Joi = require('joi');
+const mongoose = require('mongoose'),
+      Joi = require('joi'),
+      config = require('config'),
+      jwt = require('jsonwebtoken');
 
-//database model
-//////////////////////////////////////////////////////////////////
-const User = mongoose.model('User', new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -23,7 +23,16 @@ const User = mongoose.model('User', new mongoose.Schema({
         maxLength:1025,
         minLength:5
     }
-}));
+});
+
+userSchema.methods.generateAuthToken = function (){ // we don't use arrow function if we want to use 'this' 
+    const token = jwt.sign({_id: this._id}, config.get('jwtPrivateKey') );
+    return token;
+}
+
+//database model
+//////////////////////////////////////////////////////////////////
+const User = mongoose.model('User',userSchema );
 
 const validateUser = (user) => {
     const schema = {
@@ -34,5 +43,5 @@ const validateUser = (user) => {
 return Joi.validate(user,schema)
 } 
 
- module.exports.user = User;
+ module.exports.User = User;
  module.exports.validate = validateUser;

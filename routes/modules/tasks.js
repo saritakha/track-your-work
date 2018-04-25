@@ -1,11 +1,26 @@
-const express = require('express');
-const {validate,task} = require('../../models/task');
+const express = require('express'),
+     _ =require('lodash'),
+     auth = require('../../middleware/auth'),
+     {validate,Task} = require('../../models/task');
 
 //initiating router
 const router = express.Router();
 
-router.use('/' , (req, res) => {
-    res.render('done');
+router.get('/' , async (req, res) => {
+    const tasks = await Task.find().sort('title');
+    res.send(tasks);
 });
+
+router.post('/', auth , async (req,res) => {
+    const { error } = validate(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+
+     //using lodash to define schema
+    let task = new Task(_.pick(req.body,['title', 'details']));
+    task =  await task.save();
+
+    res.send(task);
+    
+})
 
 module.exports = router;
