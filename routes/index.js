@@ -13,6 +13,10 @@ if(!config.get('jwtPrivateKey')) {
     process.exit(1);
 }
 
+// Connecting to database and starting the server
+//mongoose.connect(`mongodb:${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`)
+mongoose.connect('mongodb://localhost/myAppDb')
+
 app.use(express.json());
 app.use('/api/users',users);
 app.use('/api/tasks',tasks);
@@ -43,8 +47,6 @@ app.get('/setting', (req, res) => {
     res.render('setting', { title : 'Setting'});
 });
 
-// Connecting to database and starting the server
-//mongoose.connect(`mongodb:${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`)
-mongoose.connect('mongodb://localhost/myAppDb')
+
 
 module.exports = app;

@@ -7,13 +7,13 @@ const Task = mongoose.model('Task', new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        maxLength:100,
+        maxLength:255,
         minLength:5
     },
     details: {
         type: String,
         required: true,
-        maxLength:100,
+        maxLength:255,
         minLength:5
     }
 }));

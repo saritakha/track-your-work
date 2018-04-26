@@ -9,7 +9,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    background: url(../img/tacker.jpg) no-repeat center center fixed;
+    background: url(../img/tacker2.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -24,7 +24,7 @@ label{
     background-color: rgba(4, 20, 23, 0.5);
 }
 
-form {
+#loginForm{
     border: 1px solid white;
     padding: 50px 60px;
     margin-top: 30%;
@@ -82,7 +82,12 @@ footer {
     font-size: 18px;
 }
 
-.addTask{
-    position: fixed;
-    
+#addTask{
+    border: 1px solid white;
+    padding: 50px 60px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    -webkit-box-shadow: 1px 4px 31px 1px rgba(41, 68, 204, 1);
+    -moz-box-shadow: 1px 4px 31px 1px rgba(41, 68, 204, 1);
+    box-shadow: 1px 4px 31px 1px rgba(41, 68, 204, 1);
 }
