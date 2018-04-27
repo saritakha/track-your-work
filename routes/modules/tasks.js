@@ -1,6 +1,5 @@
 const express = require('express'),
      _ =require('lodash'),
-     auth = require('../../middleware/auth'),
      {validate,Task} = require('../../models/task');
 
 //initiating router

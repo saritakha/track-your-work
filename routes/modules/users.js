@@ -1,34 +1,67 @@
-const {User,validate} = require('../../models/user'),
-      jwt = require('jsonwebtoken'),
-      config = require('config'),
-      _ = require('lodash'),
-      auth = require('../../middleware/auth'),
-      bcrypt = require('bcrypt'),
-      mongoose = require('mongoose'),
-      express = require('express'),
-      cors = require('cors'),
-      router = express.Router();
+const express = require('express'),
+multer = require('multer'),
+upload = multer({dest: './uploads'}),
+router = express.Router()
+expressValidator = require('express-validator');
+User = require('../../models/user')
 
-router.get('/me',auth, async (req,res) => {
-const user = await User.findById(req.user._id).select('-password');
-res.send(user);
+router.use(expressValidator())
+
+router.get('/', (req, res, next) => {
+    res.send('users');
 });
 
-router.post('/',  async (req, res) => {
-const { error } = validate(req.body);
-if(error) return res.status(400).send(error.details[0].message);
-
-let user = await User.findOne({ email: req.body.email });
-if(user) return res.status(400).send('User already registered');
-
- //using lodash to define schema
-user = new User(_.pick(req.body,['name', 'email','password']));
-const salt = await bcrypt.genSalt(10);
-user.password = await bcrypt.hash(user.password, salt);
-await user.save();
-
-const token = user.generateAuthToken();
-res.header('x-auth-token',token).send(_.pick(user,['_id','name', 'email']));
+router.get('/register', (req, res, next) => {
+    res.render('register', { title : 'Register'});
 });
 
+router.get('/login', (req, res, next) => {
+    res.render('login', { title : 'login'});
+});
+
+router.post('/register', upload.single('profileImage'),(req, res, next) => {
+   let name = req.body.name,
+   email = req.body.email,
+   username = req.body.username,
+   password = req.body.password1,
+   password2 = req.body.password2;
+
+   if(req.file) {
+       console.log('uploading file.....');
+       var profileimage = req.file.filename;
+   }
+   else{
+       console.log('no file uploaded...');
+       var profileimage = 'noimage.jpg';
+   }
+
+   req.checkBody('name','Name field is required').notEmpty();
+   req.checkBody('email','Email field is required').notEmpty();
+   req.checkBody('email','Email is not valid').isEmail();
+   req.checkBody('username','UserName field is required').notEmpty();
+   req.checkBody('password1','Password field is required').notEmpty();
+   req.checkBody('password2','Passwords do not match').equals(req.body.password1);
+   
+   const errors = req.validationErrors();
+
+   if(errors){
+       console.log(errors);
+       res.render('register', {title : 'Register' });
+   }else{
+    const newUser = new User({
+        name: name,
+        email: email,
+        username: username,
+        password: password,
+        profileimage: profileimage
+    });
+    User.createUser(newUser, (err, user) => {
+     if(err) throw err;
+     console.log(user);
+    });
+
+    res.location('/');
+    res.redirect('/');
+   }
+});
 module.exports = router;

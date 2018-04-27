@@ -1,47 +1,41 @@
-const mongoose = require('mongoose'),
-      Joi = require('joi'),
-      config = require('config'),
-      jwt = require('jsonwebtoken');
 
-const userSchema = new mongoose.Schema({
-    name: {
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bcrypt = require('bcryptjs');
+
+mongoose.connect('mongodb://localhost/myAppDb');
+const db = mongoose.connection;
+
+// User Schema 
+const UserSchema = new Schema({
+    username: {
         type: String,
-        required: true,
-        maxLength:50,
-        minLength:5
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        maxLength:255,
-        minLength:5
-    },
-    password: {
-        type: String,
-        required: true,
-        maxLength:1025,
-        minLength:5
-    }
+        index: true
+    }, 
+    name: { type: String },
+    email: { type: String },
+    password: { type: String },
+    profileimage: {type: String}
 });
 
-userSchema.methods.generateAuthToken = function (){ // we don't use arrow function if we want to use 'this' 
-    const token = jwt.sign({_id: this._id}, config.get('jwtPrivateKey') );
-    return token;
+const User = mongoose.model('User', UserSchema );
+module.exports = User;
+
+module.exports.createUser = (newUser, callBack) => {
+    newUser.save(callBack);
 }
 
-//database model
-//////////////////////////////////////////////////////////////////
-const User = mongoose.model('User',userSchema );
+module.exports.getUserByUsername = function(username, callBack){
+    User.findOne({username: username}, callBack);
+}
 
-const validateUser = (user) => {
-    const schema = {
-        name: Joi.string().min(5).max(50).required(),
-        email: Joi.string().min(5).max(255).required().email(),
-        password: Joi.string().min(5).max(255).required()
-    };
-return Joi.validate(user,schema)
-} 
+module.exports.getUserById = function(id, callback){
+    User.findById(id, callback);
+}
 
- module.exports.User = User;
- module.exports.validate = validateUser;
+module.exports.comparePassword = function(inPassword, hash, callback){
+    bcrypt.compare(inPassword, hash, function(err, isMatch){
+        if(err) throw err;
+        callback(null, isMatch);
+    })
+}
