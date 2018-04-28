@@ -2,22 +2,48 @@ const express = require('express'),
 multer = require('multer'),
 upload = multer({dest: './uploads'}),
 router = express.Router()
-expressValidator = require('express-validator');
-User = require('../../models/user')
+expressValidator = require('express-validator'),
+passport = require('passport'),
+localStrategy = require('passport-local'),
+User = require('../../models/user');
 
-router.use(expressValidator())
-
-router.get('/', (req, res, next) => {
-    res.send('users');
-});
+router.use(expressValidator());
 
 router.get('/register', (req, res, next) => {
     res.render('register', { title : 'Register'});
 });
 
 router.get('/login', (req, res, next) => {
-    res.render('login', { title : 'login'});
+    res.render('index', { title : 'login'});
 });
+
+router.get('/home', (req, res) => {
+    res.render('home', { title : 'Home'});
+});
+
+router.post('/login',
+  passport.authenticate('local', {failureRedirect:'/users/home'}),
+  (req, res) => {
+  res.redirect('/home');
+  });
+
+  passport.use(new localStrategy((username,password, done) => {
+      User.getUserByUsername(username, (err, user) => {
+          if(err) throw err;
+          if(!user){
+      return done(null, false, {message:'Unknown user'});
+}  
+     User.comparePassword(password,user.password),(err,isMatch) => {
+        if(err) throw err;
+        if(isMatch){
+    return done(null, user);
+} else{
+return done(null, false, {message:'Invalid Password'});
+
+}
+     }   
+})
+  }));
 
 router.post('/register', upload.single('profileImage'),(req, res, next) => {
    let name = req.body.name,
@@ -60,8 +86,8 @@ router.post('/register', upload.single('profileImage'),(req, res, next) => {
      console.log(user);
     });
 
-    res.location('/');
-    res.redirect('/');
+    res.location('/login');
+    res.redirect('/login');
    }
 });
 module.exports = router;

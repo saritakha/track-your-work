@@ -21,8 +21,14 @@ const UserSchema = new Schema({
 const User = mongoose.model('User', UserSchema );
 module.exports = User;
 
-module.exports.createUser = (newUser, callBack) => {
-    newUser.save(callBack);
+module.exports.createUser = (newUser, callBack) => 
+{
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+            newUser.password = hash;
+            newUser.save(callBack);
+        });
+    });
 }
 
 module.exports.getUserByUsername = function(username, callBack){

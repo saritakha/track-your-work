@@ -7,7 +7,6 @@ const express = require('express'),
     session = require('express-session'),
     passport = require('passport'),
     localStrategy = require('passport-local'),
-    flash = require('connect-flash'),
     helmet = require('helmet'),
     port = process.env.PORT,
     cors = require('cors'),
@@ -77,11 +76,10 @@ app.use(expressValidator({
       }        
 }));
 
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.locals.messages = require('express-messages')(req, res);
+//   next();
+// });
 //https.createServer(options, app).listen(3000 || port);
 
 // Connecting to database and starting the server
