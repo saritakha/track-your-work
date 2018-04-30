@@ -80,10 +80,10 @@ app.use(expressValidator({
 //   res.locals.messages = require('express-messages')(req, res);
 //   next();
 // });
-//https.createServer(options, app).listen(3000 || port);
+https.createServer(options, app).listen(3000 || port);
 
 // Connecting to database and starting the server
 //mongoose.connect(`mongodb:${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`);
 mongoose.connect('mongodb://localhost/myAppDb');
 
-app.listen(3000);
+

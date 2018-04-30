@@ -21,6 +21,19 @@ router.get('/home', (req, res) => {
     res.render('home', { title : 'Home'});
 });
 
+router.get('/newTask', (req, res) => {
+    res.render('addTask', { title : 'New'});
+});
+
+router.get('/done', (req, res) => {
+    res.render('done', { title : 'Done'});
+});
+
+router.get('/undone', (req, res) => {
+    res.render('undone', { title : 'Undone'});
+});
+
+
 router.post('/login',
   passport.authenticate('local', {failureRedirect:'/users/home'}),
   (req, res) => {
