@@ -91,3 +91,7 @@ footer {
     -moz-box-shadow: 1px 4px 31px 1px rgba(41, 68, 204, 1);
     box-shadow: 1px 4px 31px 1px rgba(41, 68, 204, 1);
 }
+
+#home{
+    background-color:white;
+}

@@ -13,15 +13,7 @@ router.post('/', async (req,res) => {
     let task = new Task(_.pick(req.body,['title', 'details']));
     task =  await task.save();
 
-    res.send(task);
-})
-
-//create api
-//////////////////////////////////////////////////////////////////
-router.get('/', (req, res) => {
-    Task.find({}, (err, data) => {
-        res.json(data);
-    })
+    res.redirect('/users/done');
 })
 
 module.exports = router;

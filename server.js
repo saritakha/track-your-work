@@ -13,8 +13,8 @@ const express = require('express'),
     mongoose = require('mongoose'),
     expressValidator = require('express-validator'),
     users = require('./routes/modules/users'),
+    {validate,Task} = require('./models/task'),
     routes = require('./routes/index');
-    
 
 //initiating app
 const app = express();
@@ -86,4 +86,14 @@ https.createServer(options, app).listen(3000 || port);
 //mongoose.connect(`mongodb:${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`);
 mongoose.connect('mongodb://localhost/myAppDb');
 
+
+//create api
+//////////////////////////////////////////////////////////////////
+//create api
+//////////////////////////////////////////////////////////////////
+app.get('/api', (req, res) => {
+    Task.find({}, (err, data) => {
+        res.json(data);
+    })
+})
 

@@ -1,6 +1,20 @@
 
+ alert('a');
+//getting user details 
+// const myUser = document.querySelector('#myUser').value;
+// console.log(myUser);
+
+// const getData = '/api' + myUser;
+  //////////////////////////////////////////////////////////////////////////////
+  //fetching from json
+  fetch('/api')
+    .then(res => res.json()) // returns json
+    .then(datas => {
+      createDomTree(datas);
+    });
+
 ///////////////////////////////////////////////////////////////////////////////
-const createDom = (item) => {
+const createDom = (item) =>{
 
   const myTaskDiv = document.createElement('div'),
     Title = document.createElement('h3'),
@@ -21,32 +35,7 @@ const createDom = (item) => {
   const createEmptyDom = (data) => {
     data.innerHTML = '';
   };
-
-  ///////////////////////////////////////////////////////////////////////
-  const createSelect = (jsons) => {
-    //sorting by titile
-    for (let item of jsons) {
-      const selection = document.querySelector('.select');
-      const option = document.createElement('option');
-      option.text = item.title;
-      selection.appendChild(option);
-
-      selection.addEventListener('change', () => {
-        const selected = selection.selectedIndex;
-        let selectedValue = selection[selected].value;
-        const filteredData = jsons.filter((item) => {
-          if (selectedValue) {
-            return item.title === selectedValue;
-          } else {
-            return true;
-          }
-        });
-        const myContainer = document.querySelector('#home');
-        createEmptyDom(myContainer);
-        createDomTree(filteredData);
-      });
-    }
-  }
+}
 
   ///////////////////////////////////////////////////////////////////////////////
   const createDomTree = (jsons) => {
@@ -56,12 +45,4 @@ const createDom = (item) => {
   }
 
 
-  //////////////////////////////////////////////////////////////////////////////
-  //fetching from json
-  fetch('/api/tasks')
-    .then(res => res.json()) // returns json
-    .then(datas => {
-      createDomTree(datas);
-      createSelect(datas);
-    });
-}
+
