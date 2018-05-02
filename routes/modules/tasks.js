@@ -13,7 +13,7 @@ router.post('/', async (req,res) => {
     let task = new Task(_.pick(req.body,['title', 'details']));
     task =  await task.save();
 
-    res.redirect('/users/done');
+    res.redirect('/users/undone');
 })
 
 module.exports = router;

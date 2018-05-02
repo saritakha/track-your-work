@@ -6,33 +6,38 @@ html,
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    padding: 0;
     height: 100%;
     width: 100%;
-    background: url(../img/tacker2.jpg) no-repeat center center fixed;
+     background: url(../img/bg.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: cover; 
 }
 
 label{
-    color:white;
-}
-
-.main{ 
-    background-color: rgba(4, 20, 23, 0.5);
+    color:black;
+    font-weight: bolder;
 }
 
 #loginForm{
     border: 1px solid white;
     padding: 50px 60px;
-    margin-top: 30%;
-    margin-bottom: 40%;
+    margin: 10%;
     -webkit-box-shadow: 1px 4px 31px 1px rgba(41, 68, 204, 1);
     -moz-box-shadow: 1px 4px 31px 1px rgba(41, 68, 204, 1);
-    box-shadow: 1px 4px 31px 1px rgba(41, 68, 204, 1);
+    box-shadow: 1px 4px 31px 1px rgb(55, 80, 204);
 }
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
 
 img {
     border-radius: 50%;
@@ -52,34 +57,39 @@ footer {
 }
 
 .wrapper {
+    padding: 15px;
     display: flex;
     align-items: stretch;
-} 
-
-.navbar{
-    color: white;
-    padding: 3%;
-    min-height: 100vh;
-    font-size: 18px;
-}
-
-.jumbotron {
-    background-color: bisque;
     max-width: 100%;
-    margin: 20px;
-    padding: 30px;
-    z-index: 5;
+} 
+.wrapper {
+    position: relative;
+    height: 100%;
+}
+.wrapper:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(240, 241, 243, 0.5);
 }
 
-.col-lg-3{
-    border:1px solid black;
-    padding: 10px;
-    margin: 20px;
-    background-color: rgb(130, 130, 214);
+nav a{
+    color:#2f6327;
+    font-weight: bold;
+    font-size: 25px;
 }
+
 
 .card{
-    font-size: 18px;
+    display: flex;
+    padding: 50px 70px 70px 50px;
+    margin-top: 20px;
+    margin-right: 20px ;
+    font-size: 20px;
 }
 
 #addTask{
@@ -93,5 +103,25 @@ footer {
 }
 
 #home{
-    background-color:white;
-}
+    text-align: center;
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    max-width: 100%;
+    padding: 20px;
+  } 
+
+/* adding effect to div */
+#home div {
+    background-color:peachpuff;
+    display: block;
+    padding: 20px;
+    margin: 10px;
+    overflow: hidden;
+  }
+
+  /* media query to make thumbnails responsive */
+@media only screen and (max-width: 700px) {
+    #home{
+      grid-template-columns: repeat(1,1fr);
+    }
+  }

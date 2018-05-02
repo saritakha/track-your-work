@@ -1,77 +1,46 @@
-
 <% include partials/header %>
 
-<body>
-<div class="wrapper">
-  <% include partials/nav %>
-  
-    <main class="container-fluid">
-      <header class="jumbotron bg-default">
-        <h2>Welcome to App!!</h2>
-      </header>
-      <div class="container">
-        <div class="row">
-          <article class="col-lg-3 col-md-4 col-sm-10 bg-success">
-            <card class="card">
-              <p class="card-body">
-                <h3 class="card-title ">Click to add </h3>
-                <a href="/users/newTask"class="btn btn-lg btn-pill btn-success">Add</a>
-              </p>
-            </card>
-          </article>
-          <article class="col-lg-3 col-md-4 col-sm-10  ">
-            <card class="card ">
-              <p class="card-body text-center">
-                <h3 class="card-title">Sample</h3>
-                <p class="card-text">Here are the samples of card </p>
-                <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </p>
-            </card>
-          </article>
-          <article class="col-lg-3 col-md-4 col-sm-10 ">
-            <card class="card">
-              <p class="card-body text-center">
-                <h3 class="card-title">Learn HTML</h3>
-                <p class="card-text">In this card , I want to store all my data related to HtML.</p>
-                <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </p>
-            </card>
-          </article>
-          <article class="col-lg-3 col-md-4 col-sm-10 ">
-            <card class="card">
-              <p class="card-body text-center">
-                <h3 class="card-title">Learn CSS</h3>
-                <p class="card-text">In this card , I want to store all my data related to CSS.</p>
-                <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </p>
-            </card>
-          </article>
-          <article class="col-lg-3 col-md-4 col-sm-10 " >
-            <card class="card">
-              <p class="card-body text-center">
-                <h3 class="card-title">Learn Javascript</h3>
-                <p class="card-text">Let me start of Javascript</p>
-                <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </p>
-            </card>
-          </article>
-          <article class="col-lg-3 col-md-4 col-sm-10 " >
-            <card class="card">
-              <p class="card-body text-center">
-                <h3 class="card-title">Learn Writing Poem</h3>
-                <p class="card-text">I am done with coding. I will start to learn about writing poems</p>
-                <a href="#" class="btn btn-lg btn-success disabled">Details</a>
-              </p>
-            </card>
-          </article>
-        </div>
-      <!-- <div class="embed-responsive embed-responsive-16by9">
+  <body>
+    <div class="wrapper">
+      <% include partials/nav %>
+
+        <main class="container-fluid">
+          <header class="jumbotron bg-info">
+            <h1>Welcome to App!!</h1>
+          </header>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+                <card class="card bg-default">
+                  <div class="card-body">
+                    <h1 class="card-title ">Click here to add </h1>
+                    <a href="/users/newTask" class="btn btn-primary bt-lg text-lg">Add new Task</a>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-dark">Enjoy</small>
+                  </div>
+                </card>
+              </div>
+              <div class="col-lg-4">
+                <card class="card bg-success">
+                  <div class="card-body ">
+                    <h2 class="card-title">Sample</h2>
+                    <p class="card-text">This is the sample of the card</p>
+                    <a href="#" class="btn btn-primary disabled">Details</a>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-dark">Last updated 3 mins ago</small>
+                  </div>
+                </card>
+              </div>
+            </div>
+            <!-- <div class="embed-responsive embed-responsive-16by9">
           <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
         </div> -->
-      </div>
+          </div>
+        </main>
     </div>
-  </main>
-  <% include partials/footer %>
-</body>
-</html>
- 
+    <% include partials/footer %>
+  </body>
+
+  </html>

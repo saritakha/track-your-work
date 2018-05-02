@@ -8,7 +8,7 @@ const Task = mongoose.model('Task', new mongoose.Schema({
         type: String,
         required: true,
         maxLength:255,
-        minLength:5
+        minLength:3
     },
     details: {
         type: String,
