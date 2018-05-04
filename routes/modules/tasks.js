@@ -10,7 +10,8 @@ router.post('/', async (req,res) => {
     if(error) return res.status(400).send(error.details[0].message);
 
      //using lodash to define schema
-    let task = new Task(_.pick(req.body,['title', 'details']));
+    let task = new Task(
+        _.pick(req.body,['title', 'details']));
     task =  await task.save();
 
     res.redirect('/users/undone');

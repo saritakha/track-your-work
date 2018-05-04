@@ -37,7 +37,7 @@ router.get('/undone', (req, res) => {
 router.post('/login',
   passport.authenticate('local', {failureRedirect:'/users/home'}),
   (req, res) => {
-  res.redirect('/home');
+  res.redirect('/users/home');
   });
 
   passport.use(new localStrategy((username,password, done) => {
