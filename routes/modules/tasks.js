@@ -4,12 +4,11 @@ const express = require('express'),
 
 //initiating router
 const router = express.Router();
-
 router.post('/', async (req,res) => {
     const { error } = validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
-     //using lodash to define schema
+//using lodash to define schema
     let task = new Task(
         _.pick(req.body,['title', 'details']));
     task =  await task.save();
@@ -17,4 +16,9 @@ router.post('/', async (req,res) => {
     res.redirect('/users/undone');
 })
 
+router.get('/:id'), (req, res) => {
+    
+}
+
 module.exports = router;
+

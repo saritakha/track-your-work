@@ -129,15 +129,19 @@ nav a{
   }
 
  #home button {
-     background-color: green;
+     background-color: lightseagreen;
      padding: 5px;
-
+     margin: 5px;
  } 
 
 button:hover,
 button:focus {
   font-size: 18px;
   cursor: pointer;
+}
+
+#modal {
+    display: none;
 }
 
   /* media query to make thumbnails responsive */
