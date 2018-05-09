@@ -33,31 +33,6 @@ router.get('/undone', (req, res) => {
     res.render('undone', { title : 'Undone'});
 });
 
-
-router.post('/login',
-  passport.authenticate('local', {failureRedirect:'/users/home'}),
-  (req, res) => {
-  res.redirect('/users/home');
-  });
-
-  passport.use(new localStrategy((username,password, done) => {
-      User.getUserByUsername(username, (err, user) => {
-          if(err) throw err;
-          if(!user){
-      return done(null, false, {message:'Unknown user'});
-}  
-     User.comparePassword(password,user.password),(err,isMatch) => {
-        if(err) throw err;
-        if(isMatch){
-    return done(null, user);
-} else{
-return done(null, false, {message:'Invalid Password'});
-
-}
-     }   
-})
-  }));
-
 router.post('/register', upload.single('profileImage'),(req, res, next) => {
    let name = req.body.name,
    email = req.body.email,
@@ -99,8 +74,61 @@ router.post('/register', upload.single('profileImage'),(req, res, next) => {
      console.log(user);
     });
 
-    res.location('/login');
     res.redirect('/login');
    }
 });
+
+    // Authenicating the user input 
+    passport.use(new LocalStrategy(
+        function(username, password, done){
+            User.getUserByUsername(username, function(err, user){
+                if (err) throw err;
+                if(!user){
+                    return done(null, false, {message: 'Invalid User'});
+                    console.log('Invalid User');
+                }
+                console.log('Username is Matched');
+                User.comparePassword(password, user.password, function(err, isMatch){
+                    if(err) throw err;
+                    if(isMatch){
+                        console.log('Password is Matched');
+                        return done(null, user);
+                    } else {
+                        console.log('Invalid Password');
+                        return done(null, false, {message: 'Invalid Password'});
+                    }
+                });
+
+            });
+        }
+    ));
+
+    // Serialize the User data
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
+    
+    // Deserialize User Data
+    passport.deserializeUser(function(id, done) {
+        User.getUserById(id, function(err, user) {
+          done(err, user);
+        });
+    });
+
+    // Getting login data
+    router.post('/login',
+        passport.authenticate('local', {successRedirect: '/dashboard', failureRedirect: '/login'}),
+        (req, res) => {
+            res.redirect('/home');
+        }
+    )
+
+    // Logging Out 
+    router.get('/logout', (req, res) => {
+        req.logout();
+        console.log('User is logged out.');
+        res.redirect('/login');
+    })
+
+} 
 module.exports = router;

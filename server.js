@@ -59,36 +59,27 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(expressValidator({
-    errorFormatter: (params,msg,value) => {
-        const namespace= param.split('.'),
-              root = namespace.shift(),
-              formParam = root;
-
-      while(namespace.length){
-          formParam += '[' + namespace.shift();
-      }
-      return{
-          param : formParam,
-          msg : msg,
-          value : value
-      };
-      }        
-}));
-
-// app.use(function (req, res, next) {
-//   res.locals.messages = require('express-messages')(req, res);
-//   next();
-// });
+// Global Variable for User Login
+app.use(function(req, res, next){
+    res.locals.user = req.user || null;
+    if(req.user!= null){
+      app.loggedUser = req.user._id;
+      res.locals.loggedUser = req.user._id;
+      module.exports.loggedUser = app.loggedUser;
+    } else {
+      app.loggedUser = null;
+      res.locals.loggedUser = null;
+      module.exports.loggedUser = app.loggedUser;
+    }
+    next();
+  })
+  
 https.createServer(options, app).listen(3000 || port);
 
 // Connecting to database and starting the server
 //mongoose.connect(`mongodb:${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`);
 mongoose.connect('mongodb://localhost/myAppDb');
 
-
-//create api
-//////////////////////////////////////////////////////////////////
 //create api
 //////////////////////////////////////////////////////////////////
 app.get('/api', (req, res) => {
