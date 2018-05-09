@@ -130,5 +130,4 @@ router.post('/register', upload.single('profileImage'),(req, res, next) => {
         res.redirect('/login');
     })
 
-} 
 module.exports = router;
