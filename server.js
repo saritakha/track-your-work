@@ -14,6 +14,7 @@ const express = require('express'),
     users = require('./routes/modules/users'),
     {validate,Task} = require('./models/task'),
     db = require('./config/config.js'),
+    port= process.env.PORT,
     routes = require('./routes/index');
 
 //initiating app
@@ -124,9 +125,6 @@ passport.deserializeUser(function(id, done) {
 https.createServer(options, app).listen(3000 || port);
 
 // Connecting to database and starting the server
-// const connect = `${db.db}://${db.user}:${db.pwd}@${db.host}:${db.port}/${db.dbName}`;
-// //mongoose.connect(`mongodb:${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`);
-// mongoose.connect(connect);
 
 require('dotenv').config();
 mongoose.connect('mongodb://saritakh:saritakh@ds219040.mlab.com:19040/trackyourworkdb')
