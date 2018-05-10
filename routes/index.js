@@ -11,7 +11,7 @@ const expressValidator = require('express-validator');
 router.use(expressValidator())
 
 router.use('/users',users);
-router.use('/tasks',tasks);
+router.use('/tasks',tasks);;
 
 //set route for accesing data
 router.get('/', (req, res) => {
@@ -27,6 +27,11 @@ router.get('/logout', (req, res) => {
 
 router.get('/register', (req, res, next) => {
     res.render('register', { title : 'Register'});
+});
+
+
+router.get('/addPlan', (req, res, next) => {
+    res.render('plan', { title : 'addPlan'});
 });
 
 router.post('/register', (req, res, next) => {

@@ -13,9 +13,8 @@ router.post('/',  (req,res) => {
     const myTask = new Task({
         title: req.body.title,
         details:req.body.details,
-        plan1:req.body.plan1,
-        plan2:req.body.plan2,
-        time: moment(Date.now()).format('LLLL')
+        plan:req.body.plan,
+        time: moment(Date.now()).format('LL')
     });
     console.log(myTask);
     myTask.save();
@@ -30,6 +29,16 @@ router.delete('/:id', function (req, res) {
       if(err)  console.log(err);
     });
     res.redirect('/users/undone');
+});
+
+router.patch('/:id', function (req, res) {
+    res.redirect('/update');
+    var updateObject = {
+        title: req.body.title,
+        details: req.body.details
+     }
+    var id = req.params.id;
+    db.users.update({_id  : ObjectId(id)}, {$set: updateObject});
 });
 
 

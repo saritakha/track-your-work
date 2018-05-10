@@ -20,8 +20,10 @@ const createDom = (item) => {
     Title = document.createElement('h1'),
     Details = document.createElement('h4'),
     Time = document.createElement('h4'),
+    wStatus = document.createElement('button'),
     goInside = document.createElement('button'),
     myStatus = document.createElement('button');
+    
 
   myTaskDiv.className = 'card-body text-center';
   Title.innerHTML = item.title;
@@ -29,8 +31,12 @@ const createDom = (item) => {
   Details.innerHTML = 'Details: ' + item.details;
   goInside.innerHTML = 'Go Inside';
   myStatus.innerHTML = 'Done';
+  wStatus.innerHTML = '';
+  wStatus.style.backgroundColor = "red";
+  wStatus.style.width= "100%";
 
   myTaskDiv.appendChild(Title);
+  myTaskDiv.appendChild(wStatus);
   myTaskDiv.appendChild(Details);
   myTaskDiv.appendChild(Time);
   myTaskDiv.appendChild(goInside);
@@ -39,7 +45,7 @@ const createDom = (item) => {
   document.querySelector('#home').appendChild(myTaskDiv);
 
   myStatus.addEventListener('click', () => {
-    document.querySelector('#done').appendChild(myTaskDiv);
+  document.querySelector('#done').appendChild(myTaskDiv);
   });
 
   //////////////////////////////////////////////////////////////////////////
@@ -49,6 +55,10 @@ const createDom = (item) => {
     document.getElementById('modal').style.display = "block";
     document.getElementById('title').innerHTML = item.title;
     document.getElementById('details').innerHTML = 'Details: ' + item.details;
+  })
+
+  myStatus.addEventListener('click', (e) => {
+    wStatus.style.backgroundColor = "green";
   })
 
   document.getElementById('cancel').addEventListener('click', () => {
@@ -72,7 +82,7 @@ const createDom = (item) => {
   deleteF.addEventListener('click', tryDel);
   deleteF.setAttribute('data-id', item._id);
   deleteF.style.backgroundColor = "#e0596b";
-  deleteF.style.width = '50%';
+  deleteF.style.width = '100%';
 
 }
 

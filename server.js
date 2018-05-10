@@ -13,7 +13,7 @@ const express = require('express'),
     expressValidator = require('express-validator'),
     users = require('./routes/modules/users'),
     {validate,Task} = require('./models/task'),
-    db = require('./config/config.js');
+    db = require('./config/config.js'),
     routes = require('./routes/index');
 
 //initiating app
@@ -49,7 +49,7 @@ app.use(helmet());
 app.use('/',routes);
 app.use('/users',users);
 
-require('dotenv').config();
+
 
 //using express session
 app.use(session({
@@ -124,9 +124,12 @@ passport.deserializeUser(function(id, done) {
 https.createServer(options, app).listen(3000 || port);
 
 // Connecting to database and starting the server
-const connect = `${db.db}://${db.user}:${db.pwd}@${db.host}:${db.port}/${db.dbName}`;
-//mongoose.connect(`mongodb:${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`);
-mongoose.connect(connect);
+// const connect = `${db.db}://${db.user}:${db.pwd}@${db.host}:${db.port}/${db.dbName}`;
+// //mongoose.connect(`mongodb:${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`);
+// mongoose.connect(connect);
+
+require('dotenv').config();
+mongoose.connect('mongodb://localhost/myAppDb')
 
 //create api
 //////////////////////////////////////////////////////////////////
@@ -135,4 +138,5 @@ app.get('/api', (req, res) => {
         res.json(data);
     })
 })
+
 

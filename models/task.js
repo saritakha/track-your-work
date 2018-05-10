@@ -6,15 +6,16 @@ const mongoose = require('mongoose'),
 const Task = mongoose.model('Task', new mongoose.Schema({
     title: {
         type: String,
-        required: true,
         maxLength:255,
         minLength:3
     },
     details: {
         type: String,
-        required: true,
         maxLength:255,
         minLength:5
+    },
+    plan: {
+        type: String
     },
     time: {
         type:Date

@@ -78,6 +78,10 @@ footer {
     background: rgba(240, 241, 243, 0.5);
 }
 
+nav{
+    position: fixed;
+}
+
 nav a{
     color:#2f6327;
     font-weight: bold;
@@ -162,4 +166,8 @@ button:focus {
     #home{
       grid-template-columns: repeat(1,1fr);
     }
+  }
+
+  #addPlan{
+      font-size: 30px;
   }

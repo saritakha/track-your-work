@@ -1,0 +1,16 @@
+<% include partials/header %>
+    <body>
+        <div class="wrapper">
+        <div class="container-fluid">
+            <form id="addPlan" action="/tasks" method="POST">
+                <div class="form-group">
+                  <label>Plan</label>
+                  <input type="text-area" class="form-control p-2" rows="4" name="plan" placeholder="What is your upcoming plan">
+                </div>
+                <button type="submit" class="btn btn-success btn-block ">Add Plan</button>
+              </form>
+              </div>
+        <% include partials/footer%>
+        </div>
+</body>
+</html>
