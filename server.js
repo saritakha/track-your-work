@@ -8,12 +8,12 @@ const express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
     helmet = require('helmet'),
-    port = process.env.PORT,
     cors = require('cors'),
     mongoose = require('mongoose'),
     expressValidator = require('express-validator'),
     users = require('./routes/modules/users'),
     {validate,Task} = require('./models/task'),
+    db = require('./config/config.js');
     routes = require('./routes/index');
 
 //initiating app
@@ -48,6 +48,8 @@ app.use(cookieParser());
 app.use(helmet());
 app.use('/',routes);
 app.use('/users',users);
+
+require('dotenv').config();
 
 //using express session
 app.use(session({
@@ -122,8 +124,9 @@ passport.deserializeUser(function(id, done) {
 https.createServer(options, app).listen(3000 || port);
 
 // Connecting to database and starting the server
+const connect = `${db.db}://${db.user}:${db.pwd}@${db.host}:${db.port}/${db.dbName}`;
 //mongoose.connect(`mongodb:${process.env.DB_USR}:${process.env.DB_PWD}@${process.env.DB_HOST}:27017/${process.env.DB_DATABASE}?authSource=admin`);
-mongoose.connect('mongodb://localhost/myAppDb');
+mongoose.connect(connect);
 
 //create api
 //////////////////////////////////////////////////////////////////
@@ -133,11 +136,3 @@ app.get('/api', (req, res) => {
     })
 })
 
-//delete
-app.delete('/:id', function (req, res) {
-    let id = req.params.id;
-    Task.remove({_id: id}, (err) => {
-      if(err)  console.log(err);
-    });
-    res.redirect('/users/undone');
-});

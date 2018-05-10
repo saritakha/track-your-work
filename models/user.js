@@ -3,9 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
-mongoose.connect('mongodb://localhost/myAppDb');
-const db = mongoose.connection;
-
 // User Schema 
 const UserSchema = new Schema({
     username: {
