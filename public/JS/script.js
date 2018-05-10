@@ -1,3 +1,5 @@
+
+
 //getting user details 
 // const myUser = document.querySelector('#myUser').value;
 // console.log(myUser);
@@ -42,30 +44,36 @@ const createDom = (item) => {
 
   //////////////////////////////////////////////////////////////////////////
   // add event listeners to the buttons
-  const modal = document.createElement('div'),
-  mTitle = document.createElement('h1'),
-  mDetails = document.createElement('h4'),
-  x = document.createElement('button'),
-  mTime = document.createElement('h4');
-
-  mTitle.innerHTML = item.title;
-  mTime.innerHTML = Time;
-  mDetails.innerHTML = Details;
-  
-  modal.appendChild(mTitle);
-  modal.appendChild(mDetails);
-  modal.appendChild(mTime);
-  modal.appendChild(x);
-
-  myTaskDiv.appendChild(modal);
 
   goInside.addEventListener('click', (e) => {
-    modal.style.display = "block";
+    document.getElementById('modal').style.display = "block";
+    document.getElementById('title').innerHTML = item.title;
+    document.getElementById('details').innerHTML = 'Details: ' + item.details;
   })
 
-  x.addEventListener('click', () => {
-    modal.style.display = "none";
+  document.getElementById('cancel').addEventListener('click', () => {
+    document.getElementById('modal').style.display = "none";
   });
+
+  const deleteF = document.getElementById('delete');
+
+  // delete function for deleting 
+  const tryDel = (e) => {
+    e.preventDefault();
+    console.log(deleteF.dataset.id)
+    fetch('/tasks/'+deleteF.dataset.id, {
+      method: 'DELETE'
+    }).then(() => {
+      window.location.href= '/users/undone';
+    })
+  }
+
+  //deletebutton and s stying
+  deleteF.addEventListener('click', tryDel);
+  deleteF.setAttribute('data-id', item._id);
+  deleteF.style.backgroundColor = "#e0596b";
+  deleteF.style.width = '50%';
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

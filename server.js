@@ -6,7 +6,7 @@ const express = require('express'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
     passport = require('passport'),
-    localStrategy = require('passport-local'),
+    LocalStrategy = require('passport-local'),
     helmet = require('helmet'),
     port = process.env.PORT,
     cors = require('cors'),
@@ -73,6 +73,51 @@ app.use(function(req, res, next){
     }
     next();
   })
+
+  // Authenicating the user input 
+ passport.use(new LocalStrategy(
+    function(username, password, done){
+        User.getUserByUsername(username, function(err, user){
+            if (err) throw err;
+            if(!user){
+                return done(null, false, {message: 'Invalid User'});
+                console.log('Invalid User');
+            }
+            console.log('Username is Matched');
+            User.comparePassword(password, user.password, function(err, isMatch){
+                if(err) throw err;
+                if(isMatch){
+                    console.log('Password is Matched');
+                    return done(null, user);
+                } else {
+                    console.log('Invalid Password');
+                    return done(null, false, {message: 'Invalid Password'});
+                }
+            });
+
+        });
+    }
+));
+
+// Serialize the User data
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+// Deserialize User Data
+passport.deserializeUser(function(id, done) {
+    User.getUserById(id, function(err, user) {
+      done(err, user);
+    });
+});
+
+  // Getting login data
+  app.post('/',
+  passport.authenticate('local', {successRedirect: '/users/home', failureRedirect: '/users/home'}),
+  (req, res) => {
+      res.redirect('/users/home');
+  }
+)
   
 https.createServer(options, app).listen(3000 || port);
 
@@ -88,3 +133,11 @@ app.get('/api', (req, res) => {
     })
 })
 
+//delete
+app.delete('/:id', function (req, res) {
+    let id = req.params.id;
+    Task.remove({_id: id}, (err) => {
+      if(err)  console.log(err);
+    });
+    res.redirect('/users/undone');
+});

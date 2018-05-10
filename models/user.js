@@ -12,10 +12,8 @@ const UserSchema = new Schema({
         type: String,
         index: true
     }, 
-    name: { type: String },
     email: { type: String },
-    password: { type: String },
-    profileimage: {type: String}
+    password: { type: String }
 });
 
 const User = mongoose.model('User', UserSchema );

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Joi = require('joi');
+const mongoose = require('mongoose'),
+      Joi = require('joi');
 
 //database model
 //////////////////////////////////////////////////////////////////
@@ -24,7 +24,8 @@ const Task = mongoose.model('Task', new mongoose.Schema({
 const validateTask = (task) => {
     const schema = {
         title: Joi.string().min(1).max(50).required(),
-        details: Joi.string().min(5).max(50).required()
+        details: Joi.string().min(5).max(50).required(),
+        
     };
 return Joi.validate(task,schema)
 } 
