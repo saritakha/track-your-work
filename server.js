@@ -129,7 +129,7 @@ https.createServer(options, app).listen(3000 || port);
 // mongoose.connect(connect);
 
 require('dotenv').config();
-mongoose.connect('mongodb://localhost/myAppDb')
+mongoose.connect('mongodb://saritakh:saritakh@ds219040.mlab.com:19040/trackyourworkdb')
 
 //create api
 //////////////////////////////////////////////////////////////////
