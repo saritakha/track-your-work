@@ -14,7 +14,6 @@ const express = require('express'),
     users = require('./routes/modules/users'),
     {validate,Task} = require('./models/task'),
     db = require('./config/config.js'),
-    port= process.env.PORT,
     routes = require('./routes/index');
 
 //initiating app
@@ -122,7 +121,7 @@ passport.deserializeUser(function(id, done) {
   }
 )
   
-https.createServer(options, app).listen(3000 || port);
+https.createServer(options, app).listen(3000 || db.process.env.PORT);
 
 // Connecting to database and starting the server
 
