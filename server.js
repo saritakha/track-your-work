@@ -127,7 +127,7 @@ passport.deserializeUser(function(id, done) {
   }
 )
   
-https.createServer(options, app).listen(3000 || db.process.env.PORT);
+https.createServer(options, app).listen(db.process.env.PORT || 3000);
 
 // Connecting to database and starting the server
 
