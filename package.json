@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/saritakha/track-your-work#readme",
   "dependencies": {
+    "apidoc": "^0.17.6",
     "bcrypt": "^2.0.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.0.0",

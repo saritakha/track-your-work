@@ -4,6 +4,10 @@ const express = require('express'),
 
 //initiating router
 const router = express.Router();
+/**
+ * @api {post} /tasks  tasks posted
+ * @apiName postTasks
+ */
 router.post('/',  (req,res) => {
     const { error } = validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -23,7 +27,11 @@ router.post('/',  (req,res) => {
 })
 
 //delete
-router.delete('/:id', function (req, res) {
+/**
+ * @api {delete} /tasks/:id  Go to task with some id
+ * @apiName deleteTasks
+ */
+router.delete('/:id',  function (req, res) {
     let id = req.params.id;
     Task.remove({_id: id}, (err) => {
       if(err)  console.log(err);
@@ -31,6 +39,12 @@ router.delete('/:id', function (req, res) {
     res.redirect('/users/undone');
 });
 
+
+//delete
+/**
+ * @api {patch} /tasks/:id  update task
+ * @apiName patchTasks
+ */
 router.patch('/:id', function (req, res) {
     res.redirect('/update');
     var updateObject = {
