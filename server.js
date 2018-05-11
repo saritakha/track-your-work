@@ -133,7 +133,10 @@ https.createServer(options, app).listen(3000 || db.process.env.PORT);
 
 //mongoose.connect('mongodb://heroku_0j98rs97:jgtn160mid326um362ha4tkarf@ds119640.mlab.com:19640/heroku_0j98rs97');
 
-mongoose.connect(`mongodb://${db.usr}:${db.pwd}@${db.host}:${db.port}/${db.dbName}`)
+var connectionString = `mongodb://${db.usr}:${db.pwd}@${db.host}:${db.port}/${db.dbName}`;
+mongoose.connect(connectionString);
+
+console.log(connectionString);
 
 // mongoose.connect(`mongodb://${db.uri}`);
 
