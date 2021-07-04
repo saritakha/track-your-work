@@ -27,7 +27,7 @@ const createDom = (item) => {
 
   myTaskDiv.className = 'card-body text-center';
   Title.innerHTML = item.title;
-  Time.innerHTML = 'Time: ' + item.time;
+  Time.innerHTML = 'Time: ' + moment(item.time).format("DD-MM-YYYY");
   Details.innerHTML = 'Details: ' + item.details;
   goInside.innerHTML = 'Go Inside';
   myStatus.innerHTML = 'Done';

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express'),
     ejs = require('ejs'),
     https = require('https'),
@@ -113,6 +115,10 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
+/**
+ * @api {post} /users  Go to users
+ * @apiName postUser
+ */
   // Getting login data
   app.post('/',
   passport.authenticate('local', {successRedirect: '/users/home', failureRedirect: '/users/home'}),
@@ -121,14 +127,25 @@ passport.deserializeUser(function(id, done) {
   }
 )
   
-https.createServer(options, app).listen(3000 || db.process.env.PORT);
+app.listen(process.env.PORT || 3000);
 
 // Connecting to database and starting the server
 
-require('dotenv').config();
-mongoose.connect('mongodb://heroku_0j98rs97:jgtn160mid326um362ha4tkarf@ds119640.mlab.com:19640/heroku_0j98rs97');
+//mongoose.connect('mongodb://heroku_0j98rs97:jgtn160mid326um362ha4tkarf@ds119640.mlab.com:19640/heroku_0j98rs97');
 
-//mongoose.connect(`mongodb://${db.usr}:${db.pwd}@${db.host}:${db.port}/${db.dbName}`)
+var connectionString = `mongodb://${db.usr}:${db.pwd}@${db.host}:${db.port}/${db.dbName}`;
+mongoose.connect(connectionString);
+
+console.log(connectionString);
+
+// mongoose.connect(`mongodb://${db.uri}`);
+
+
+/**
+ * @api {get} /api  Go to tasks list
+ * @apiName getApi
+ */
+
 //create api
 //////////////////////////////////////////////////////////////////
 app.get('/api', (req, res) => {
